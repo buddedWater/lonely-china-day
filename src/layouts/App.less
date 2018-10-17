@@ -1,43 +1,31 @@
 :global{
 	.ant-layout-header{
 		background: #fff;
-        margin-bottom: 30px;
+        //padding-bottom: 40px;
         padding: 0;
-        height: auto;
-        line-height: 0;
-        .navs{
-            padding: 50px 0 15px;
-            text-align: right;
-            a{
-                color: #FFB6C1;               
-            }
-            a:hover{
-                color: #FFE4E1;
-            }
-            .ant-divider{
-                background: rgba(0, 0, 0, 0.65);
-            }
-            .user{
-                font-weight: 500;
-            }
-        }        
+        height: 40px;
+        line-height: 0;        
 	}
 	.ant-layout-footer{
 		background: #fff;
+        padding: 0;
 	}
-  .icon{
-    width: 21em;
-    height: 5em;
-    vertical-align: -0.15em;
-    fill: currentColor;
-    overflow: hidden;
-    font-size: 42px;
-    position: absolute;
-    top: 0px;
-    left: -50px;
-    color: #FFF0F5;
-  }
 }
 .content{
-
+    .navs{
+        padding-left: 40px;
+        border-right: 1px solid #008080;
+       .nav{
+            padding: 3px 0;
+            span{
+                cursor: pointer;
+                color: #DCDCDC;
+                font-size: 14px;
+                font-weight: 300;
+                &:hover{
+                    color: #008080;
+                }
+            }
+        } 
+    }    
 }

@@ -9,6 +9,7 @@ export default {
     user:'',
     locationQuery: {},
     locationPathname: '',
+    checkNav: 1,
   },
 
   subscriptions: {
