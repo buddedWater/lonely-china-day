@@ -1,0 +1,31 @@
+.project_operate{
+  :global{
+    .ant-table{
+      font-size: 12px;
+      thead{
+        border-top: 1px solid #e8e8e8;
+      }      
+      .ant-table-thead > tr > th, .ant-table-tbody > tr > td {
+        white-space: nowrap;
+        padding: 14px;
+        background: #fff;
+        .text_span{
+          width: 150px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          display: inline-block;
+        }
+      }
+    }
+  };
+  .new_col{
+    text-align: right;
+    padding: 10px 0;
+    :global{
+      .ant-btn{
+        margin-right: 15px;
+      }
+    };
+  }
+}
