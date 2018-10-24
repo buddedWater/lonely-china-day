@@ -7,11 +7,11 @@ import { Row, Col, Table, Divider, Button, Popconfirm } from 'antd';
 
 const ProjectOperate = ({ project_operate, dispatch }) => {
 
-  project_operate.columns[2].render = (text, record) => {
+  project_operate.columns[3].render = (text, record) => {
     return <span title={text} className="text_span">{text}</span>
   }
 
-  project_operate.columns[4].render = (text, record) => (
+  project_operate.columns[5].render = (text, record) => (
     <span>
       <a href="javascript:;" onClick={()=>handleModify(record)}>修改</a>
       <Divider type="vertical" />
@@ -38,11 +38,11 @@ const ProjectOperate = ({ project_operate, dispatch }) => {
 
   const onTableChange = (pagination, filters, sorter) => {
     dispatch({type:"project_operate/updateState", payload:{current:pagination.current, orderBy:sorter.field, order:sorter.order === "descend"?-1:1}})
-    dispatch({type:"project_operate/query_project_operate"})
+    dispatch({type:"project_operate/query_project"})
   }
 
   const handleModify = (record) => {
-    dispatch({type:"project_operate/updateState", payload:{modalVisible:true, modalTitle:"修改", modifyData:record}})
+    dispatch({type:"project_operate/updateState", payload:{modalVisible:true, modalTitle:"修改项目", modifyData:record}})
   }
 
   const handleDelete = (record) => {
@@ -61,6 +61,7 @@ const ProjectOperate = ({ project_operate, dispatch }) => {
     modalVisible: project_operate.modalVisible,
     modalTitle: project_operate.modalTitle,
     modifyData: project_operate.modifyData,
+    modelList: project_operate.modelList,
     onCancel: ()=>onCancel(),
     dispatch
   }
@@ -69,7 +70,7 @@ const ProjectOperate = ({ project_operate, dispatch }) => {
     <Fragment>
       <Row className={styles.project_operate}>
         <Col span={24} className={styles.new_col}>
-          <Button type="primary" onClick={()=>handleAdd(true,"新增",1)}>新增</Button>
+          <Button type="primary" onClick={()=>handleAdd(true,"新增项目",1)}>新增</Button>
         </Col>
         <Col span={24} style={{padding: '10px 0'}}>
           <Table {...tableProps}></Table>

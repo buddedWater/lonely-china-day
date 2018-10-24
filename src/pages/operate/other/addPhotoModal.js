@@ -2,10 +2,11 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import styles from './addPhotoModal.less';
 import moment from 'moment';
-import { Row, Col, Input, Form, Modal, notification } from 'antd';
+import { Row, Col, Input, Form, Modal, notification, Select } from 'antd';
 
 const FormItem = Form.Item;
 const TextArea = Input.TextArea
+const Option = Select.Option
 
 const AddPhotoModal = ({ addData, form }) => {
 
@@ -93,7 +94,6 @@ const AddPhotoModal = ({ addData, form }) => {
               <FormItem {...formItemLayout} label="标题">
                 {form.getFieldDecorator('name', {
                   initialValue: addData.modifyData.name ? addData.modifyData.name : "",
-                  rules: [{ required: true, message: '请输入标题!' }],
                 })(
                   <Input />
                 )}
@@ -104,6 +104,20 @@ const AddPhotoModal = ({ addData, form }) => {
                   rules: [{ required: true, message: '请输入内容!' }],
                 })(
                   <Input />
+                )}
+              </FormItem>
+              <FormItem {...formItemLayout} label="所属项目">
+                {form.getFieldDecorator('project', {
+                  initialValue: addData.modifyData.project ? addData.modifyData.project : "",
+                  rules: [{ required: true, message: '请选择所属项目!' }],
+                })(
+                  <Select placeholder="请选择">
+                    {addData.projectList.map((item, key)=>{
+                      return (
+                        <Option key={key} value={item.value}>{item.name}</Option>
+                      )
+                    })}
+                  </Select>
                 )}
               </FormItem>
               <FormItem {...formItemLayout} label="描述">

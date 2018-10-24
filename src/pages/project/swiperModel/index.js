@@ -1,12 +1,11 @@
 import React, { Fragment } from 'react';
-import { connect } from 'dva';
 import PropTypes from 'prop-types';
 import styles from './index.less';
 import { Row, Col } from 'antd';
 import Swiper from 'react-id-swiper';
 import 'swiper/dist/css/swiper.css';
 
-const Building = ({ building, dispatch }) => {
+const SwiperModel = ({ imgList }) => {
 
   const swiperProps = {
     slidesPerView: 1.5,
@@ -18,10 +17,10 @@ const Building = ({ building, dispatch }) => {
 
   return (    
     <Fragment>
-      <Row className={styles.building}>
+      <Row className={styles.swiperModel}>
         <Col span={24}>
           <Swiper {...swiperProps} >
-            {building.imgList.map((item ,key)=>{
+            {imgList.map((item ,key)=>{
              return (<div key={key} className={styles.single_item}><img alt={key} src={item.url}/></div>)
             })}
           </Swiper>
@@ -31,9 +30,8 @@ const Building = ({ building, dispatch }) => {
   );
 }
 
-Building.propTypes = {
-  operate: PropTypes.object,
-  dispatch: PropTypes.func
+SwiperModel.propTypes = {
+  imgList: PropTypes.array
 };
 
-export default connect(({ building }) => ({ building }))(Building);
+export default SwiperModel;

@@ -2,10 +2,11 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import styles from './addProjectModal.less';
 import moment from 'moment';
-import { Row, Col, Input, Form, Modal, notification } from 'antd';
+import { Row, Col, Input, Form, Modal, notification, Select } from 'antd';
 
-const FormItem = Form.Item;
+const FormItem = Form.Item
 const TextArea = Input.TextArea
+const Option = Select.Option
 
 const AddProjectModal = ({ addData, form }) => {
 
@@ -96,6 +97,20 @@ const AddProjectModal = ({ addData, form }) => {
                   rules: [{ required: true, message: '请输入名称!' }],
                 })(
                   <Input />
+                )}
+              </FormItem>
+              <FormItem {...formItemLayout} label="布局模式">
+                {form.getFieldDecorator('model', {
+                  initialValue: addData.modifyData.model ? addData.modifyData.model : "",
+                  rules: [{ required: true, message: '请选择布局模式!' }],
+                })(
+                  <Select placeholder="请选择">
+                    {addData.modelList.map((item, key)=>{
+                      return (
+                        <Option key={key} value={item.value}>{item.name}</Option>
+                      )
+                    })}
+                  </Select>
                 )}
               </FormItem>
               <FormItem {...formItemLayout} label="描述">

@@ -17,7 +17,7 @@ const AboutMe = ({ aboutMe, dispatch }) => {
         </Col>  
         <Col span={20} className={styles.info}>
           <Row>
-            <Col span={24}>This is Lonely China Day!</Col>
+            <Col span={24}>This is L0nely China Day!</Col>
           </Row>
         </Col> 
       </Row>

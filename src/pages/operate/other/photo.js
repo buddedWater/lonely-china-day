@@ -3,10 +3,17 @@ import { connect } from 'dva';
 import PropTypes from 'prop-types';
 import styles from './photo.less';
 import AddPhotoModal from './addPhotoModal';
-import { Row, Col, Table, Divider, Button, Popconfirm } from 'antd';
-import { FullPageImage } from '../../../components'
+import { Row, Col, Table, Divider, Button, Popconfirm, Select } from 'antd';
+import { FullPageImage } from '../../../components';
+
+const Option = Select.Option
 
 const PhotoOperate = ({ photo_operate, dispatch }) => {
+
+  photo_operate.columns[1].render = (text, record) => {
+    let obj = photo_operate.projectList.find((item, key)=>{return item.value === text})
+    return <span>{obj.name}</span>
+  }
 
   photo_operate.columns[2].render = (text, record) => {
     return <a href="javascript:;" onClick={()=>handleView(text)}>预览</a>
@@ -43,7 +50,7 @@ const PhotoOperate = ({ photo_operate, dispatch }) => {
 
   const onTableChange = (pagination, filters, sorter) => {
     dispatch({type:"photo_operate/updateState", payload:{current:pagination.current, orderBy:sorter.field, order:sorter.order === "descend"?-1:1}})
-    dispatch({type:"photo_operate/query_photo_operate"})
+    dispatch({type:"photo_operate/query_photo"})
   }
 
   const handleView = (text) => {
@@ -51,7 +58,7 @@ const PhotoOperate = ({ photo_operate, dispatch }) => {
   }
 
   const handleModify = (record) => {
-    dispatch({type:"photo_operate/updateState", payload:{modalVisible:true, modalTitle:"修改", modifyData:record}})
+    dispatch({type:"photo_operate/updateState", payload:{modalVisible:true, modalTitle:"修改照片", modifyData:record}})
   }
 
   const handleDelete = (record) => {
@@ -70,6 +77,7 @@ const PhotoOperate = ({ photo_operate, dispatch }) => {
     modalVisible: photo_operate.modalVisible,
     modalTitle: photo_operate.modalTitle,
     modifyData: photo_operate.modifyData,
+    projectList: photo_operate.projectList,
     onCancel: ()=>onCancel(),
     dispatch
   }
@@ -84,11 +92,27 @@ const PhotoOperate = ({ photo_operate, dispatch }) => {
     dispatch({type:"photo_operate/updateState", payload:{fullVisible:false, url:""}})
   }
 
+  const onSelecChange = (val) => {
+    dispatch({type:"photo_operate/updateState", payload:{project:val}})
+    dispatch({type:"photo_operate/query_photo"})
+  }
+
   return (    
     <Fragment>
       <Row className={styles.photo_operate}>
-        <Col span={24} className={styles.new_col}>
-          <Button type="primary" onClick={()=>handleAdd(true,"新增",1)}>新增</Button>
+        <Col span={24} style={{padding: '20px 0'}}>
+          <Row>
+            <Col span={20} className={styles.search_col}>
+              <Select style={{ width: 200 }} placeholder="Please Select" onChange={(val)=>onSelecChange(val)}>
+                {photo_operate.projectList.map((item, key)=>{
+                  return (
+                    <Option key={key} value={item.value}>{item.name}</Option>
+                  )
+                })}
+              </Select>
+            </Col>
+            <Col span={4} className={styles.new_col}><Button type="primary" onClick={()=>handleAdd(true,"新增照片",1)}>新增</Button></Col>
+          </Row>        
         </Col>
         <Col span={24} style={{padding: '10px 0'}}>
           <Table {...tableProps}></Table>

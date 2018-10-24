@@ -24,15 +24,15 @@ export default {
     order: -1,
     fullVisible: false,
     url: '',
-    project: 'all',
-    projectList: []
+    projectList: [],
+    project: ""
   },
 
   subscriptions: {
     setup({ dispatch, history }) {
       return history.listen(({ pathname, search }) => {
         if(pathname === '/operate'){
-          dispatch({type:'query_photo'})
+          dispatch({type:'query'})
         }
       });
     },
@@ -40,16 +40,21 @@ export default {
 
   effects: {
 
+    *query({ payload }, { call, put, select }) {
+      yield put({type:'query_project'})
+      yield put({type:'query_photo'})
+    },
+
     *query_project({ payload }, { call, put, select }) {
       let data = yield call(getProject)
       if(data.code === 1){
-        yield put({type:'updateState',payload:{projectList:{name:'全部',value:'all'}.concat(data.list)}})
+        yield put({type:'updateState',payload:{projectList:data.list.map((item, key)=>{return {name:item.name, value:item._id}})}})
       }
     },
 
     *query_photo({ payload }, { call, put, select }) {
-      const { current, pageSize, orderBy, order } = yield select(_ => _.photo_operate)
-      let data = yield call(service.getPhoto, { current, pageSize, orderBy, order })
+      const { current, pageSize, orderBy, order, project } = yield select(_ => _.photo_operate)
+      let data = yield call(service.getPhoto, { current, pageSize, orderBy, order, project })
       if(data.code === 1){
         yield put({type:'updateState',payload:{dataSource:data.list.map((item, key)=>{item.key = key; return item}),total:data.total}})
       }

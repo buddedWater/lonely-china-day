@@ -1,17 +1,16 @@
 import React, { Fragment } from 'react';
-import { connect } from 'dva';
 import PropTypes from 'prop-types';
 import styles from './index.less';
 import { Row, Col } from 'antd';
 
-const StoriedBuilding = ({ storiedBuilding, dispatch }) => {
+const VerticalModel = ({ imgList }) => {
 
   return (    
     <Fragment>
-      <Row className={styles.storiedBuilding}>
+      <Row className={styles.verticalModel}>
         <Col span={18}>
           <Row gutter={24}>
-            {storiedBuilding.imgList.map((item ,key)=>{
+            {imgList.map((item ,key)=>{
              return (<Col span={12} key={key} className={styles.single_item}><img alt={key} src={item.url}/></Col>)
             })}
           </Row>
@@ -21,9 +20,8 @@ const StoriedBuilding = ({ storiedBuilding, dispatch }) => {
   );
 }
 
-StoriedBuilding.propTypes = {
-  operate: PropTypes.object,
-  dispatch: PropTypes.func
+VerticalModel.propTypes = {
+  imgList: PropTypes.array
 };
 
-export default connect(({ storiedBuilding }) => ({ storiedBuilding }))(StoriedBuilding);
+export default VerticalModel;

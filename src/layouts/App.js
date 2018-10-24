@@ -26,7 +26,7 @@ const App = ({
   const handleNav = (num) => {
     if(num === 1){
       dispatch({type:'app/updateState', payload:{checkNav: 1}})
-      dispatch(routerRedux.push('/project/building'))
+      dispatch(routerRedux.push('/project'))
     }else if(num === 2){
       dispatch({type:'app/updateState', payload:{checkNav: 2}})
       dispatch(routerRedux.push('/about'))
@@ -36,7 +36,7 @@ const App = ({
   const renderNavs = () => {
     return (
       <Row className={styles.navs}>
-        <Col span={24}><h2>Lonely China Day</h2></Col>
+        <Col span={24}><h2>L0nely China Day</h2></Col>
         <Col span={24} className={styles.nav} ><span onClick={()=>handleNav(1)} style={{color: app.checkNav === 1 ? '#008080' : '' }}>Project</span></Col>
         <Col span={24} className={styles.nav} ><span onClick={()=>handleNav(2)} style={{color: app.checkNav === 2 ? '#008080' : '' }}>About Me</span></Col>
       </Row>
@@ -46,7 +46,7 @@ const App = ({
 	return (
 		<Fragment>
       <Helmet>
-        <title>LONELYCHINADAY</title>
+        <title>L0NELYCHINADAY</title>
         <link rel="icon" href={logo} type="image/x-icon" />
       </Helmet>
       <Header></Header>
