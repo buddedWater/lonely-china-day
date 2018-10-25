@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { Row, Col } from 'antd';
+import { Row, Col, BackTop, Avatar, Dropdown, Menu } from 'antd';
 import PropTypes from 'prop-types';
 import { connect } from 'dva';
 import { withRouter } from 'dva/router';
@@ -33,6 +33,17 @@ const App = ({
     }
   }
 
+  const clickMenu = ({key}) => {
+    if(key === "2"){handleLogout()}
+  }
+
+  const menu = (
+    <Menu onClick={({key})=>clickMenu({key})}>
+      <Menu.Item key="1">{JSON.parse(window.sessionStorage.getItem("user"))}</Menu.Item>
+      <Menu.Item key="2"><a style={{color: "#1890ff"}} href="javascript:;">登出</a></Menu.Item>
+    </Menu>
+  );
+
   const renderNavs = () => {
     return (
       <Row className={styles.navs}>
@@ -56,10 +67,16 @@ const App = ({
             {(location.pathname === "/" || location.pathname === "/owner" || location.pathname === "/operate") ? null: renderNavs()}
           </Col>
 					<Col {...content} >{ children }</Col>
-          <Col {...offset}></Col>
+          <Col {...offset}>
+            {location.pathname === "/operate" ? 
+              <Dropdown overlay={menu}>
+                <Avatar style={{backgroundColor:'#DAA520'}}>USER</Avatar>
+              </Dropdown> : null}         
+          </Col>
 				</Row>
 			</Content>
-			<Footer></Footer>					
+			<Footer></Footer>	
+      <BackTop/>				
 		</Fragment>
 	)
 }

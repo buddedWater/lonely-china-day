@@ -100,7 +100,7 @@ const PhotoOperate = ({ photo_operate, dispatch }) => {
   return (    
     <Fragment>
       <Row className={styles.photo_operate}>
-        <Col span={24} style={{padding: '20px 0'}}>
+        <Col span={24} style={{padding: '15px 0'}}>
           <Row>
             <Col span={20} className={styles.search_col}>
               <Select style={{ width: 200 }} placeholder="Please Select" onChange={(val)=>onSelecChange(val)}>
