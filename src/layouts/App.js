@@ -15,8 +15,8 @@ const App = ({
   children, dispatch, app, loading, location,
 }) => {
 
-  const offset = (location.pathname === "/" || location.pathname === "/owner" || location.pathname === "/operate") ? {xs:2, sm:4, md:4, lg:4, xl:5, xxl:6} : {xs:4, sm:4, md:4, lg:4, xl:3, xxl:2}
-  const content = (location.pathname === "/" || location.pathname === "/owner" || location.pathname === "/operate") ? {xs:20, sm:16, md:16, lg:16, xl:14, xxl:12} : {xs:20, sm:20, md:20, lg:20, xl:20, xxl:21}
+  const offset = (location.pathname === "/" || location.pathname === "/owner" || location.pathname === "/operate") ? {xs:2, sm:4, md:4, lg:4, xl:5, xxl:6} : {xs:4, sm:4, md:4, lg:4, xl:2, xxl:2}
+  const content = (location.pathname === "/" || location.pathname === "/owner" || location.pathname === "/operate") ? {xs:20, sm:16, md:16, lg:16, xl:14, xxl:12} : {xs:20, sm:20, md:20, lg:20, xl:21, xxl:21}
 
   const handleLogout = () => {
     window.sessionStorage.clear()
@@ -46,8 +46,7 @@ const App = ({
 
   const renderNavs = () => {
     return (
-      <Row className={styles.navs}>
-        <Col span={24}><h2>l0nelychinaday</h2></Col>
+      <Row className={styles.navs}>       
         <Col span={24} className={styles.nav} ><span onClick={()=>handleNav(1)} style={{color: app.checkNav === 1 ? '#008080' : '' }}>Project</span></Col>
         <Col span={24} className={styles.nav} ><span onClick={()=>handleNav(2)} style={{color: app.checkNav === 2 ? '#008080' : '' }}>About Me</span></Col>
       </Row>
