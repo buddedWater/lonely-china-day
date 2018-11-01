@@ -4,9 +4,13 @@ export default {
   namespace: 'project',
 
   state: {
-   checkNav: 0,
-   projectList: [],
-   imgList: []
+    checkNav: 0,
+    projectList: [],
+    imgList: [],
+    orderBy: 'priority',
+    order: 1,
+    fullVisible: false,
+    url:''
   },
 
   subscriptions: {
@@ -20,17 +24,17 @@ export default {
   },
 
   effects: {
-
-
     *query_photo({ payload }, { call, put, select }) {
-      let data = yield call(service.getPhoto, { project: payload.project })
+      const { orderBy, order } = yield select(_ => _.project)
+      let data = yield call(service.getPhoto, { project: payload.project, orderBy, order })
       if(data.code === 1){
         yield put({type:'updateState',payload:{imgList:data.list}})
       }
     }, 
 
     *query_project({ payload }, { call, put, select }) {
-      let data = yield call(service.getProject)
+      const { orderBy, order } = yield select(_ => _.project)
+      let data = yield call(service.getProject, { orderBy, order })
       if(data.code === 1){
         yield put({type:'updateState',payload:{projectList:data.list}})
         yield put({type:"query_photo",payload:{project:data.list[0]._id}})

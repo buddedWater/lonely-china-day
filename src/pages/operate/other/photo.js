@@ -19,11 +19,11 @@ const PhotoOperate = ({ photo_operate, dispatch }) => {
     return <a href="javascript:;" onClick={()=>handleView(text)}>预览</a>
   }
 
-  photo_operate.columns[3].render = (text, record) => {
+  photo_operate.columns[4].render = (text, record) => {
     return <span title={text} className="text_span">{text}</span>
   }
 
-  photo_operate.columns[6].render = (text, record) => (
+  photo_operate.columns[7].render = (text, record) => (
     <span>
       <a href="javascript:;" onClick={()=>handleModify(record)}>修改</a>
       <Divider type="vertical" />

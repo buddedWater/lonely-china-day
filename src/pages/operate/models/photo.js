@@ -9,6 +9,7 @@ export default {
     columns: [{ title: '标题', dataIndex: 'name', key: 'name' }, 
       { title: '所属项目', dataIndex: 'project', key: 'project' }, 
       { title: '图片', dataIndex: 'url', key: 'url' }, 
+      { title: '优先级', dataIndex: 'priority', key: 'priority' },
       { title: '描述', dataIndex: 'desc', key: 'desc' },
       { title: '创建时间', dataIndex: 'createTime', key: 'createTime', sorter: (a, b) => a.createTime - b.createTime },
       { title: '修改时间', dataIndex: 'modifyTime', key: 'modifyTime', sorter: (a, b) => a.modifyTime - b.modifyTime },

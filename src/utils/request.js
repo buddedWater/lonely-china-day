@@ -7,9 +7,10 @@ import pathToRegexp from 'path-to-regexp'
 import { message } from 'antd'
 import { YQL, CORS } from './config'
 
-axios.defaults.headers.common['Authorization'] = `Bearer ${JSON.parse(window.sessionStorage.getItem("token"))}`
-
 const fetch = (options) => {
+
+  axios.defaults.headers.common['Authorization'] = `Bearer ${JSON.parse(window.sessionStorage.getItem("token"))}`
+
   let {
     method = 'get',
     data,

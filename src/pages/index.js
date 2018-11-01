@@ -6,7 +6,7 @@ import Link from 'umi/link';
 function IndexPage() {
   return (    
     <div className={styles.normal}>
-      <Link to="/project" className={styles.nav}>L0nely China Day!</Link>
+      <Link to="/project" className={styles.nav}>l0nely china day</Link>
     </div>
   );
 }

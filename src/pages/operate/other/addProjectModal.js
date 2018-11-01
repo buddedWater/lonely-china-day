@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import styles from './addProjectModal.less';
 import moment from 'moment';
-import { Row, Col, Input, Form, Modal, notification, Select } from 'antd';
+import { Row, Col, Input, Form, Modal, notification, Select, InputNumber } from 'antd';
 
 const FormItem = Form.Item
 const TextArea = Input.TextArea
@@ -24,11 +24,19 @@ const AddProjectModal = ({ addData, form }) => {
 
   const onOK = (e) => {
     e.preventDefault();
-    form.validateFields((err, values) => {
-      if (!err) {
-        handleSubmit(values)
-      }
-    });
+    if(addData.selectModel === "swiperModel"){
+      form.validateFields((err, values) => {
+        if (!err) {
+          handleSubmit(values)
+        }
+      });
+    }else{
+      form.validateFields(['_id', 'name', 'model', 'priority', 'desc'],(err, values) => {
+        if (!err) {
+          handleSubmit(values)
+        }
+      });
+    }  
   }
 
   const handleSubmit = (values) => {
@@ -70,11 +78,11 @@ const AddProjectModal = ({ addData, form }) => {
   const formItemLayout = {
     labelCol: {
       xs: { span: 24 },
-      sm: { span: 4 },
+      sm: { span: 5 },
     },
     wrapperCol: {
       xs: { span: 24 },
-      sm: { span: 20 },
+      sm: { span: 19 },
     },
   };
 
@@ -104,13 +112,29 @@ const AddProjectModal = ({ addData, form }) => {
                   initialValue: addData.modifyData.model ? addData.modifyData.model : "",
                   rules: [{ required: true, message: '请选择布局模式!' }],
                 })(
-                  <Select placeholder="请选择">
+                  <Select placeholder="请选择" onChange={(val)=>addData.onSelectChange(val)}>
                     {addData.modelList.map((item, key)=>{
                       return (
                         <Option key={key} value={item.value}>{item.name}</Option>
                       )
                     })}
                   </Select>
+                )}
+              </FormItem>
+              <FormItem {...formItemLayout} label="单页图片数" style={{display:addData.selectModel === "swiperModel" ? "block": "none"}}>
+                {form.getFieldDecorator('number', {
+                  initialValue: addData.modifyData.number ? addData.modifyData.number : "",
+                  rules: [{ required: true, message: '请输入单页图片数!' }],
+                })(
+                  <InputNumber  />
+                )}
+              </FormItem>
+              <FormItem {...formItemLayout} label="优先级">
+                {form.getFieldDecorator('priority', {
+                  initialValue: addData.modifyData.priority ? addData.modifyData.priority : "",
+                  rules: [{ required: true, message: '请输入项目优先级!' }],
+                })(
+                  <InputNumber  />
                 )}
               </FormItem>
               <FormItem {...formItemLayout} label="描述">

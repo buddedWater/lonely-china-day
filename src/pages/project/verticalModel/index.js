@@ -8,12 +8,12 @@ const VerticalModel = ({ imgList }) => {
   return (    
     <Fragment>
       <Row className={styles.verticalModel}>
-        <Col span={18}>
-          <Row gutter={24}>
-            {imgList.map((item ,key)=>{
-             return (<Col span={12} key={key} className={styles.single_item}><img alt={key} src={item.url}/></Col>)
-            })}
-          </Row>
+        <Col span={18}>         
+          {imgList.map((item ,key)=>{
+           let temp = key % 2 === 0 ? <Row gutter={24}><Col span={12} key={key} className={styles.single_item}><img alt={key} src={item.url}/></Col><Col span={12}></Col></Row>:
+            <Row gutter={24}><Col span={12}></Col><Col span={12} key={key} className={styles.single_item}><img alt={key} src={item.url}/></Col></Row>
+            return temp 
+          })}
         </Col>     
       </Row>   
     </Fragment>

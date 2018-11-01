@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import styles from './addPhotoModal.less';
 import moment from 'moment';
-import { Row, Col, Input, Form, Modal, notification, Select } from 'antd';
+import { Row, Col, Input, Form, Modal, notification, Select, InputNumber  } from 'antd';
 
 const FormItem = Form.Item;
 const TextArea = Input.TextArea
@@ -118,6 +118,14 @@ const AddPhotoModal = ({ addData, form }) => {
                       )
                     })}
                   </Select>
+                )}
+              </FormItem>
+              <FormItem {...formItemLayout} label="优先级">
+                {form.getFieldDecorator('priority', {
+                  initialValue: addData.modifyData.priority ? addData.modifyData.priority : "",
+                  rules: [{ required: true, message: '请输入图片优先级!' }],
+                })(
+                  <InputNumber  />
                 )}
               </FormItem>
               <FormItem {...formItemLayout} label="描述">

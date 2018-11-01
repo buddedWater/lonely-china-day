@@ -7,11 +7,11 @@ import { Row, Col, Table, Divider, Button, Popconfirm } from 'antd';
 
 const ProjectOperate = ({ project_operate, dispatch }) => {
 
-  project_operate.columns[3].render = (text, record) => {
+  project_operate.columns[4].render = (text, record) => {
     return <span title={text} className="text_span">{text}</span>
   }
 
-  project_operate.columns[5].render = (text, record) => (
+  project_operate.columns[6].render = (text, record) => (
     <span>
       <a href="javascript:;" onClick={()=>handleModify(record)}>修改</a>
       <Divider type="vertical" />
@@ -42,7 +42,7 @@ const ProjectOperate = ({ project_operate, dispatch }) => {
   }
 
   const handleModify = (record) => {
-    dispatch({type:"project_operate/updateState", payload:{modalVisible:true, modalTitle:"修改项目", modifyData:record}})
+    dispatch({type:"project_operate/updateState", payload:{modalVisible:true, selectModel:record.model, modalTitle:"修改项目", modifyData:record}})
   }
 
   const handleDelete = (record) => {
@@ -53,8 +53,8 @@ const ProjectOperate = ({ project_operate, dispatch }) => {
     dispatch({type:"project_operate/updateState", payload:{modalVisible:show, modalTitle:title}})  
   }
 
-  const onCancel = () =>{
-    dispatch({type:"project_operate/updateState", payload:{modalVisible:false, modifyData:{}}})  
+  const onCancel = () => {
+    dispatch({type:"project_operate/updateState", payload:{modalVisible:false, modifyData:{}, selectModel:""}})  
   }
 
   const addData = {
@@ -62,8 +62,14 @@ const ProjectOperate = ({ project_operate, dispatch }) => {
     modalTitle: project_operate.modalTitle,
     modifyData: project_operate.modifyData,
     modelList: project_operate.modelList,
+    selectModel: project_operate.selectModel,
+    onSelectChange: (val)=>onSelectChange(val),
     onCancel: ()=>onCancel(),
     dispatch
+  }
+
+  const onSelectChange = (val) => {
+    dispatch({type:"project_operate/updateState", payload:{selectModel:val}})  
   }
 
   return (    

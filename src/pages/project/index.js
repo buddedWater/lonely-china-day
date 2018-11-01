@@ -6,8 +6,9 @@ import styles from './index.less';
 import { Row, Col } from 'antd';
 import SwiperModel from './swiperModel';
 import VerticalModel from './verticalModel';
+import { FullPageImage } from '../../components';
 
-const Project = ({ project, dispatch, props, children }) => {
+const Project = ({ project, dispatch }) => {
 
   const handleNav = (key) => {
     dispatch({type:'project/updateState', payload:{checkNav: key, imgList:[]}})
@@ -18,7 +19,7 @@ const Project = ({ project, dispatch, props, children }) => {
     if(project.projectList.length === 0) return
     let model = project.projectList[project.checkNav].model
     if(model === "swiperModel"){
-      return <SwiperModel imgList={project.imgList} />
+      return <SwiperModel imgList={project.imgList} number={project.projectList[project.checkNav].number} handleView={(url)=>handleView(url)}/>
     }else if(model === "verticalModel"){
       return <VerticalModel imgList={project.imgList}/>
     }
@@ -26,6 +27,20 @@ const Project = ({ project, dispatch, props, children }) => {
 
   const navGrid = {xs:4, sm:5, md:4, lg:3, xl:3, xxl:2} 
   const contentGrid = {xs:22, sm:17, md:18, lg:19, xl:19, xxl:20} 
+
+  const fullPageData = {
+    visible: project.fullVisible,
+    url: project.url,
+    handleCancel: ()=>handleCancel(),
+  }
+
+  const handleView = (url) => {
+    dispatch({type:"project/updateState", payload:{fullVisible:true, url:url}})
+  }
+
+  const handleCancel = () => {
+    dispatch({type:"project/updateState", payload:{fullVisible:false, url:""}})
+  }
 
   return (    
     <Fragment>
@@ -45,14 +60,15 @@ const Project = ({ project, dispatch, props, children }) => {
         <Col {...contentGrid} className={styles.children}>
           { renderChildren() }    
         </Col>     
-      </Row>   
+      </Row> 
+      <FullPageImage {...fullPageData}/>  
     </Fragment>
   );
 }
 
 Project.propTypes = {
   operate: PropTypes.object,
-  dispatch: PropTypes.func
+  dispatch: PropTypes.func,
 };
 
 export default connect(({ project }) => ({ project }))(Project);

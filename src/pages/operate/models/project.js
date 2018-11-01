@@ -7,6 +7,7 @@ export default {
     dataSource: [],
     columns: [{ title: '名称', dataIndex: 'name', key: 'name' }, 
       { title: '布局模式', dataIndex: 'model', key: 'model' },
+      { title: '优先级', dataIndex: 'priority', key: 'priority' },
       { title: '描述', dataIndex: 'desc', key: 'desc', width: 150 },
       { title: '创建时间', dataIndex: 'createTime', key: 'createTime', sorter: (a, b) => a.createTime - b.createTime },
       { title: '修改时间', dataIndex: 'modifyTime', key: 'modifyTime', sorter: (a, b) => a.modifyTime - b.modifyTime },
@@ -20,6 +21,7 @@ export default {
     modifyData: {},
     orderBy: 'modifyTime',
     order: -1,
+    selectModel: "",
     modelList: [{name:'swiperModel', value:'swiperModel'},{name:'verticalModel', value:'verticalModel'}]
   },
 
