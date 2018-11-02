@@ -15,7 +15,7 @@ const App = ({
   children, dispatch, app, loading, location,
 }) => {
 
-  const offset = (location.pathname === "/" || location.pathname === "/owner" || location.pathname === "/operate") ? {xs:2, sm:4, md:4, lg:4, xl:5, xxl:6} : {xs:4, sm:4, md:4, lg:4, xl:2, xxl:2}
+  const offset = (location.pathname === "/" || location.pathname === "/owner" || location.pathname === "/operate") ? {xs:2, sm:4, md:4, lg:4, xl:5, xxl:6} : {xs:4, sm:4, md:4, lg:3, xl:2, xxl:2}
   const content = (location.pathname === "/" || location.pathname === "/owner" || location.pathname === "/operate") ? {xs:20, sm:16, md:16, lg:16, xl:14, xxl:12} : {xs:20, sm:20, md:20, lg:20, xl:21, xxl:21}
 
   const handleLogout = () => {
