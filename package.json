@@ -4,6 +4,7 @@
     "start": "umi dev",
     "build": "umi build",
     "lint": "eslint --ext .js src test",
+    "analyze": "cross-env ESLINT=none ANALYZE=true umi build",
     "precommit": "npm run lint"
   },
   "dependencies": {
@@ -16,6 +17,7 @@
     "umi-plugin-dva": "^0.7.1"
   },
   "devDependencies": {
+    "cross-env": "^5.2.0",
     "eslint": "^4.14.0",
     "eslint-config-umi": "^0.1.1",
     "eslint-plugin-flowtype": "^2.34.1",
