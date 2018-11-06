@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import styles from './addProjectModal.less';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import { Row, Col, Input, Form, Modal, notification, Select, InputNumber } from 'antd';
 
 const FormItem = Form.Item
@@ -41,7 +41,7 @@ const AddProjectModal = ({ addData, form }) => {
 
   const handleSubmit = (values) => {
     if(values._id){
-      values.modifyTime = moment().format('YYYY-MM-DD HH:mm:ss')
+      values.modifyTime = dayjs().format('YYYY-MM-DD HH:mm:ss')
       addData.dispatch({type:"project_operate/update", payload:{values}}).then((data)=>{
         if(data.code === 1){
           onCancel();
@@ -57,8 +57,8 @@ const AddProjectModal = ({ addData, form }) => {
       })
     }else{
       delete values['_id']
-      values.createTime = moment().format('YYYY-MM-DD HH:mm:ss')
-      values.modifyTime = moment().format('YYYY-MM-DD HH:mm:ss')
+      values.createTime = dayjs().format('YYYY-MM-DD HH:mm:ss')
+      values.modifyTime = dayjs().format('YYYY-MM-DD HH:mm:ss')
       addData.dispatch({type:"project_operate/add", payload:{values}}).then((data)=>{
         if(data.code === 1){
           onCancel();

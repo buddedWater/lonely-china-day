@@ -1,7 +1,8 @@
+
 export default {
   plugins: [
-    'umi-plugin-dva'
-    /*[
+    'umi-plugin-dva',
+    [
       'umi-plugin-routes',
       {
         exclude: [
@@ -10,8 +11,17 @@ export default {
           /models\//,
           /components\//,
           /services\//
-        ]
-      }
-    ]*/
-  ]
+        ],
+      },
+    ],
+    [
+      'umi-plugin-dll',
+      {
+        exclude: [],
+        include: ["dva", "dva/router", "dva/saga", "dva/fetch", "antd/es"],
+      },
+    ],
+  ],
+  ignoreMomentLocale: true,
+  disableServiceWorker: true
 }
