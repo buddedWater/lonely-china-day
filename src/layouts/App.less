@@ -1,38 +1,71 @@
 :global{
 	.ant-layout-header{
-		background: #fff;
-        //padding-bottom: 40px;
-        padding: 0;
-        height: 40px;
-        line-height: 0;        
+		background: #fff;     
+    padding: 0;
+    height: 40px;
+    line-height: 0;        
 	}
 	.ant-layout-footer{
 		background: #fff;
-        padding: 0;
+    padding: 0;
 	}
-    .ant-avatar-circle{
-        position: relative;
-        left: 100px;
-        top: 74px;
-        cursor: pointer;
+  .ant-avatar-circle{
+    position: relative;
+    left: 100px;
+    top: 74px;
+    cursor: pointer;
+  }
+  #nprogress {
+    pointer-events: none;
+    .bar {
+      background: #008080;
+      position: fixed;
+      z-index: 1024;
+      top: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      height: 2px;
     }
+    .peg {
+      display: block;
+      position: absolute;
+      right: 0;
+      width: 100px;
+      height: 100%;
+      box-shadow: 0 0 10px #008080,0 0 5px #008080;
+      opacity: 1.0;
+      transform: rotate(3deg) translate(0px,-4px);
+    }
+  }
+  .nprogress-custom-parent {
+    overflow: hidden;
+    position: relative;
+
+    #nprogress {
+      .bar {
+        position: absolute;
+      }
+    }
+  }
 }
+
 .content{
-    .navs{
-        padding-left: 30px;
-        border-right: 1px solid #008080;
-       .nav{
-            padding: 3px 0;
-            text-align: center;
-            span{
-                cursor: pointer;
-                color: #DCDCDC;
-                font-size: 14px;
-                font-weight: 300;
-                &:hover{
-                    color: #008080;
-                }
-            }
-        } 
-    }    
+  .navs{
+    padding-left: 30px;
+    border-right: 1px solid #008080;
+   .nav{
+      padding: 3px 0;
+      text-align: center;
+      span{
+        cursor: pointer;
+        color: #DCDCDC;
+        font-size: 14px;
+        font-weight: 300;
+        &:hover{
+          color: #008080;
+        }
+      }
+    } 
+  }    
 }
